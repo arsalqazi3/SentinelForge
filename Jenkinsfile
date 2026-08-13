@@ -12,5 +12,12 @@ pipeline {
                 echo 'Checkout completed successfully.'
             }
         }
+
+        stage('Unit Tests') {
+            steps {
+                sh 'pip install -r requirements.txt'
+                sh 'pytest tests/'
+            }
+        }
     }
 }
