@@ -37,14 +37,5 @@ def create_task():
     return jsonify(task), 201
 
 
-# NOTE: bare except left on purpose to trip the Quality Gate test
-# (SonarQube Code Smell: catch specific exceptions, not everything).
-def parse_task_count(raw_value):
-    try:
-        return int(raw_value)
-    except:
-        return 0
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
