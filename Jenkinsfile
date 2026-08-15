@@ -29,7 +29,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'sonar-scanner'
                     withSonarQubeEnv('sonarqube') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sentinelforge -Dsonar.sources=."
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sentinelforge -Dsonar.sources=app.py,tests/ -Dsonar.exclusions=venv/**,**/__pycache__/**,*.png"
                     }
                 }
             }
