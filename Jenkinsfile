@@ -29,13 +29,15 @@ pipeline {
                 script {
                     def scannerHome = tool 'sonar-scanner'
                     withSonarQubeEnv('sonarqube') {
-                        sh """
-                            echo "SONAR_HOST_URL: \$SONAR_HOST_URL"
-                            echo "Token length: \${#SONAR_AUTH_TOKEN}"
-                            ${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sentinelforge -Dsonar.sources=app.py,tests/ -Dsonar.exclusions=venv/**,**/__pycache__/**,*.png
-                        """
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sentinelforge -Dsonar.sources=app.py,tests/ -Dsonar.exclusions=venv/**,**/__pycache__/**,*.png"
                     }
                 }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true
             }
         }
     }
