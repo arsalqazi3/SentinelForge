@@ -23,5 +23,16 @@ pipeline {
                 '''
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sentinelforge -Dsonar.sources=."
+                    }
+                }
+            }
+        }
     }
 }
