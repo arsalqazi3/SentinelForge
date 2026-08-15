@@ -7,6 +7,9 @@ app = Flask(__name__)
 # pattern to flag later in the pipeline (see project README).
 API_KEY = "sk_test_1234567890abcdef"
 
+# NOTE: also fake, also left on purpose to trip the Quality Gate test.
+AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLEFAKEKEY123"
+
 tasks = []
 next_id = 1
 
